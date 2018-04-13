@@ -1,0 +1,100 @@
+<h1>Contact Form</h1>
+      <hr>
+		
+		  <a href="#!contact-list" class="btn btn-default pull-right" role="button">Contact List</a>
+		<br><br>
+		
+
+		<div class="well well-lg">
+			 <form class="form-horizontal" name="contactForm" novalidate>
+				<div class="form-group">
+				  <label class="control-label col-sm-2" for="firstName">First Name :</label>
+				  <div class="col-sm-5">
+					<input type="text" ng-model="contact.firstName" name="firstName" class="form-control" placeholder="Enter the first name" required>
+					<span style="color:red" ng-show="contactForm.$submitted || contactForm.firstName.$touched">
+					  <span ng-show="contactForm.firstName.$error.required">First Name is required.</span>
+					 </span>
+				  </div>
+				</div>
+				<div class="form-group">
+				  <label class="control-label col-sm-2" for="email">Last Name :</label>
+				  <div class="col-sm-5">
+					<input type="text" ng-model="contact.lastName" name="lastName" class="form-control" placeholder="Enter the last name" required>
+					<span style="color:red" ng-show="contactForm.$submitted || contactForm.lastName.$touched">
+					  <span ng-show="contactForm.lastName.$error.required">Last Name is required.</span>
+					 </span>
+				  </div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="email">Email :</label>
+					<div class="col-sm-5">
+						<button ng-click="addMoreEmail()" type="button" class="btn pull-right">
+							<span class="glyphicon glyphicon-plus"></span>
+						</button>
+					</div>
+				</div>
+				<hr>
+				<div class="form-group" ng-repeat="e in contact.emails">
+					<div class="col-sm-2">
+						<select ng-model="e.emailType" name="eType{{$index}}" class="form-control" required>
+							<option>Work</option>
+							<option>Personal</option>
+						 </select>
+						 <span style="color:red" ng-show="contactForm.$submitted || contactForm.eType{{$index}}.$touched">
+					  <span ng-show="contactForm.eType{{$index}}.$error.required">Email type is required.</span>
+					 </span>
+					</div>
+					<div class="col-sm-4">
+						<input ng-model="e.emailAdd" name="conEmail{{$index}}" type="email" class="form-control" placeholder="Enter email address" required>
+						<span style="color:red" ng-show="contactForm.$submitted || contactForm.conEmail{{$index}}.$touched">
+					  <span ng-show="contactForm.conEmail{{$index}}.$error.required">Email is required.</span>
+					  <span ng-show="contactForm.conEmail{{$index}}.$error.email">Invalid email address.</span>
+					 </span>
+					</div>
+					<div class="col-sm-1">
+						<button ng-click="removeEmail($index)" type="button" class="btn pull-right">
+							<span class="glyphicon glyphicon-minus"></span>
+						</button>
+					</div>
+				</div>
+		
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="phone">Phone No :</label>
+					<div class="col-sm-5">
+						<button ng-click="addMorePhn()" type="button" class="btn pull-right">
+							<span class="glyphicon glyphicon-plus"></span>
+						</button>
+					</div>
+				</div>
+				<hr>
+				<div class="form-group" ng-repeat="ph in contact.phoneNos">
+					<div class="col-sm-2">
+						<select ng-model="ph.phoneType" name="pType{{$index}}" class="form-control" required>
+							<option>Work</option>
+							<option>Personal</option>
+						 </select>
+						 <span style="color:red" ng-show="contactForm.$submitted || contactForm.pType{{$index}}.$touched">
+					  <span ng-show="contactForm.pType{{$index}}.$error.required">Phone type is required.</span>
+					 </span>
+					</div>
+					<div class="col-sm-4">
+						<input ng-model="ph.phoneNo" name="phn{{$index}}" type="number" class="form-control" placeholder="Enter contact no." required>
+						<span style="color:red" ng-show="contactForm.$submitted || contactForm.phn{{$index}}.$touched">
+					  <span ng-show="contactForm.phn{{$index}}.$error.required">Phone no is required.</span>
+					 </span>
+					</div>
+					<div class="col-sm-1">
+						<button ng-click="removePhn($index)" type="button" class="btn pull-right">
+							<span class="glyphicon glyphicon-minus"></span>
+						</button>
+					</div>
+				</div>
+				<hr>
+				<div class="form-group">        
+				  <div class="col-sm-offset-5">
+					<button type="submit" class="btn btn-default" ng-click="contactForm.$valid && saveContact()">Save</button>
+					<button type="button" class="btn btn-default" ng-click="reset(contactForm)">Cancel</button>
+				  </div>
+				</div>
+			</form>
+		</div>

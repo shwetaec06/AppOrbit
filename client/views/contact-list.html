@@ -1,0 +1,44 @@
+<h1 ng-init="getContacts()">Contact List</h1>
+      <hr>
+      
+		<div class="form-group">
+		  <label class="control-label col-sm-2" for="pwd">Quick Find Contacts:</label>
+		  <div class="col-sm-4">          
+			<input type="text" ng-model="searchStr" class="form-control" placeholder="Type Here">
+		  </div>
+		</div>
+		
+		<a href="#!contact-form" class="btn btn-default pull-right">Add Contact</a>
+		<br><br>
+		
+		  <table class="table table-bordered">
+			<thead>
+			  <tr>
+				<th>Name</th>
+				<th>Email Address</th>
+				<th>Contact No</th>
+			  </tr>
+			</thead>
+			<tbody>
+			  <tr ng-repeat="c in contactList | filter:searchStr | limitTo : itemsPerPage : (currentPage - 1) * itemsPerPage">
+				<td>{{c.firstName}} {{c.lastName}}</td>
+				<td>
+					<ul>
+						<li style="list-style-type:none" ng-repeat="e in c.emails">
+							<label>{{e.emailType}}</label> :&nbsp;
+							<span>{{e.emailAdd}}</span>
+						</li>
+					</ul>
+				</td>
+				<td>
+					<ul>
+						<li style="list-style-type:none" ng-repeat="p in c.phoneNos">
+							<label>{{p.phoneType}}</label> :&nbsp;
+							<span>{{p.phoneNo}}</span>
+						</li>
+					</ul>
+				</td>
+			  </tr>
+			</tbody>
+		  </table>
+		  <ul class="pull-right" uib-pagination items-per-page="itemsPerPage" total-items="totalItems" ng-model="currentPage"></ul>
